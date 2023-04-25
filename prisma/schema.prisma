@@ -1,0 +1,2207 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model AmostragemSerpro {
+  Id          Int     @default(autoincrement())
+  CPF         String? @db.VarChar(500)
+  NomeCTN     String? @db.VarChar(300)
+  NomeSerpro  String? @db.VarChar(500)
+  Situacao    String? @db.VarChar(500)
+  TipoFiliado String? @db.VarChar(500)
+  IdFiliado   Int?
+  Data        String? @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Atualizacao {
+  Id                    Int     @default(autoincrement())
+  First_Name            String? @db.VarChar(300)
+  Last_Name             String? @db.VarChar(300)
+  Email                 String? @db.VarChar(300)
+  Data_Assinatura       String? @db.VarChar(300)
+  CPF                   String? @db.VarChar(300)
+  CEP                   String? @db.VarChar(300)
+  Street_Address        String? @db.VarChar(300)
+  City                  String? @db.VarChar(300)
+  State_Region          String? @db.VarChar(300)
+  Numero                String? @db.VarChar(300)
+  Associated_Company_ID String? @db.VarChar(300)
+  Associated_Company    String? @db.VarChar(300)
+  Bairro                String? @db.VarChar(300)
+  Franquia              String? @db.VarChar(300)
+  IdContact             Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Base_sd_mychesys {
+  INDICE        Int?
+  ID_PACIENTE   Int?
+  ID_CLINICA    Int?
+  DATA_CADASTRO DateTime? @db.DateTime
+  NOME_PACIENTE String?   @db.VarChar(Max)
+  DT_NASCIMENTO DateTime? @db.DateTime
+  UF            String?   @db.VarChar(4)
+  TELEFONE      String?   @db.VarChar(50)
+  CELULAR       String?   @db.VarChar(50)
+  EMAIL         String?   @db.VarChar(Max)
+  CPF           String?   @db.VarChar(50)
+  ENDERECO      String?   @db.VarChar(Max)
+  NUMERO        String?   @db.VarChar(Max)
+  COMPLEMENTO   String?   @db.VarChar(Max)
+  BAIRRO        String?   @db.VarChar(Max)
+  MUNICIPIO     String?   @db.VarChar(Max)
+  CEP           String?   @db.VarChar(Max)
+  SEXO          String?   @db.VarChar(Max)
+  IDADE         Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model BaseClinica {
+  INDICE            String? @db.VarChar(Max)
+  ID_PACIENTE       Int?
+  ID_CLINICA        Int?
+  DATA_CADASTRO     String? @db.VarChar(Max)
+  NOME_PACIENTE     String? @db.VarChar(Max)
+  DT_NASCIMENTO     String? @db.VarChar(Max)
+  UF                String? @db.VarChar(Max)
+  TELEFONE          String? @db.VarChar(Max)
+  CELULAR           String? @db.VarChar(Max)
+  EMAIL             String? @db.VarChar(Max)
+  CPF               String? @db.VarChar(Max)
+  ENDERECO          String? @db.VarChar(Max)
+  NUMERO            String? @db.VarChar(Max)
+  COMPLEMENTO       String? @db.VarChar(Max)
+  BAIRRO            String? @db.VarChar(Max)
+  MUNICIPIO         String? @db.VarChar(Max)
+  CEP               String? @db.VarChar(Max)
+  SEXO              String? @db.VarChar(Max)
+  IDADE             String? @db.VarChar(Max)
+  IDAGENDA          Int?
+  STATUS_AGENDA     String? @db.VarChar(Max)
+  TIPO_PROCEDIMENTO String? @db.VarChar(Max)
+  CONVENIO          String? @db.VarChar(Max)
+  ESPECIALIDADE     String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+model BasePropensosDesfiliacao_13_04_22 {
+  ID_FILIADO    Int    @id(map: "PK_BasePropensosDesfiliacao_13_04_22")
+  MATRICULA     String @db.NVarChar(50)
+  NO            String @db.NVarChar(10)
+  GRUPO         String @db.NVarChar(50)
+  NOME_FANTASIA String @db.NVarChar(50)
+  REGIONAL      String @db.NVarChar(50)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ClinicaFranquiaCTN {
+  ID_FRANQUIA_CTN Int?
+  ID_CLINICA      Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ClinicaFranquiaCVF {
+  ID_FRANQUIA_CVF Int?
+  ID_CLINICA      Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ClinicasHub {
+  Id          Int      @default(autoincrement())
+  IdClinica   Int?
+  IdFranquia  Int?
+  NomeClinica String?  @db.VarChar(Max)
+  Franquia    String?  @db.VarChar(Max)
+  Owner       Int?
+  EmailHub    String?  @db.VarChar(Max)
+  Ativo       Boolean?
+  IdSub       Int?
+  Sistema     String?  @db.VarChar(5)
+
+  @@ignore
+}
+
+model CobrancaMensageria {
+  Id             Int       @id(map: "PK_CobrancaMensageria") @default(autoincrement())
+  IdFranquia     Int?
+  IdFiliado      Int?
+  IdTicket       Int?
+  IdContact      Int?
+  StatusEnvio    String?   @db.VarChar(60)
+  Mensagem       String?   @db.VarChar(150)
+  TipoEnvio      String?   @db.VarChar(50)
+  DataEnvio      DateTime? @db.DateTime
+  UnidadeNegocio String?   @db.VarChar(120)
+  NumeroTelefone String?   @db.VarChar(25)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model CONCILIACAO10 {
+  Ticket_ID                      String?   @map("Ticket ID") @db.NVarChar(255)
+  Nome_do_t_quete                String?   @map("Nome do tíquete") @db.NVarChar(255)
+  Pipeline                       String?   @db.NVarChar(255)
+  Status_do_t_quete              String?   @map("Status do tíquete") @db.NVarChar(255)
+  Data_de_cria__o                DateTime? @map("Data de criação") @db.DateTime
+  Prioridade                     String?   @db.NVarChar(255)
+  Propriet_rio_do_t_quete        String?   @map("Proprietário do tíquete") @db.NVarChar(255)
+  Fonte                          String?   @db.NVarChar(255)
+  Data_da__ltima_atividade       DateTime? @map("Data da última atividade") @db.DateTime
+  Franquia___Contato_Concilia__o String?   @map("Franquia - Contato Conciliação") @db.NVarChar(255)
+  colunaDM                       String?   @db.NVarChar(255)
+  IdFiliado                      String?   @db.NVarChar(255)
+  Associated_Company_ID          String?   @map("Associated Company ID") @db.NVarChar(255)
+  Associated_Company             String?   @map("Associated Company") @db.NVarChar(255)
+  Associated_Contact_IDs         String?   @map("Associated Contact IDs") @db.NVarChar(255)
+  Associated_Contacts            String?   @map("Associated Contacts") @db.NVarChar(255)
+  Associated_Deal_IDs            String?   @map("Associated Deal IDs") @db.NVarChar(255)
+  Associated_Deals               String?   @map("Associated Deals") @db.NVarChar(255)
+
+  @@ignore
+}
+
+model Contato {
+  Id                    Int       @id(map: "PK__Contato__3214EC07455C80F7")
+  FirstName             String?   @db.VarChar(200)
+  Email                 String?   @db.VarChar(100)
+  LastName              String?   @db.VarChar(200)
+  Phone                 String?   @db.VarChar(30)
+  CPF                   String?   @db.VarChar(20)
+  Bairro                String?   @db.VarChar(100)
+  CEP                   String?   @db.VarChar(10)
+  City                  String?   @db.VarChar(40)
+  ClosedDate            DateTime? @db.DateTime
+  Complemento           String?   @db.VarChar(100)
+  CreateDate            DateTime? @db.DateTime
+  DataUltimaAtualizacao DateTime? @db.DateTime
+  DataFiliacao          DateTime? @db.DateTime
+  DateOfBirth           DateTime? @db.DateTime
+  Franquia              String?   @db.VarChar(100)
+  FranquiaResponsavel   String?   @db.VarChar(100)
+  HubspotOwnerId        Int?
+  Matricula             String?   @db.VarChar(20)
+  MobilePhone           String?   @db.VarChar(30)
+  Numero                Int?
+  OrigemVenda           String?   @db.VarChar(100)
+  StatusCliente         String?   @db.VarChar(50)
+  StatusFinanceiro      String?   @db.VarChar(50)
+  Telefone              String?   @db.VarChar(30)
+  UF                    String?   @db.VarChar(3)
+  IdFiliado             Int?
+  LastModifiedDate      DateTime? @db.DateTime
+  DataExclusao          DateTime? @db.DateTime
+  Excluido              Boolean?
+  FirstConversionDate   DateTime? @db.DateTime
+}
+
+model ContatosHubSpot {
+  Id                Int       @id(map: "PK_ContatosHubSpot") @default(autoincrement())
+  IdFiliado         Int?
+  IdContatoHubSpot  Int?
+  Dt_Import         DateTime? @db.DateTime
+  AtivoCTN          Boolean?
+  AtivoHubSpot      Boolean?
+  DtUltimaAlteracao DateTime? @db.DateTime
+  IdPessoa          Int?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ContatosMerge {
+  Column_1  String? @db.VarChar(Max)
+  CPF       String? @db.VarChar(Max)
+  ContactID Int?
+  VidMerge  Int?
+
+  @@ignore
+}
+
+model ContatosSemMatriculaRefiliacao {
+  ID_do_contato         Int     @id(map: "PK_ContatosSemMatriculaRefiliacao")
+  Nome                  String? @db.VarChar(Max)
+  Sobrenome             String? @db.VarChar(Max)
+  First_name            String? @db.VarChar(Max)
+  Pipeline_Refilia__o   String? @map("Pipeline_Refiliação") @db.VarChar(Max)
+  CPF                   String? @db.VarChar(Max)
+  ID_da_Matr_cula       String? @map("ID_da_Matrícula") @db.VarChar(Max)
+  Associated_Company_ID String? @db.VarChar(Max)
+  Associated_Company    String? @db.VarChar(Max)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ContatosSNT {
+  Contact_ID                   Int
+  First_Name                   String? @db.VarChar(Max)
+  Last_Name                    String? @db.VarChar(Max)
+  First_name1                  String? @db.VarChar(Max)
+  Email                        String? @db.VarChar(Max)
+  Phone_Number                 String? @db.VarChar(Max)
+  CPF                          String? @db.VarChar(Max)
+  Bairro                       String? @db.VarChar(Max)
+  CEP                          String? @db.VarChar(Max)
+  Postal_Code                  String? @db.VarChar(Max)
+  City                         String? @db.VarChar(Max)
+  Cidade                       String? @db.VarChar(Max)
+  Close_Date                   String? @db.VarChar(Max)
+  Complemento                  String? @db.VarChar(Max)
+  Create_Date                  String? @db.VarChar(Max)
+  Data_de_filia__o             String? @map("Data_de_filiação") @db.VarChar(Max)
+  Data_Nascimento              String? @db.VarChar(Max)
+  Franquia                     String? @db.VarChar(Max)
+  Franquia_CTN                 String? @db.VarChar(Max)
+  Franquia_CDT                 String? @db.VarChar(Max)
+  Matr_cula_PreparaTODOS       String? @map("Matrícula_PreparaTODOS") @db.VarChar(Max)
+  ID_da_Matr_cula              String? @map("ID_da_Matrícula") @db.VarChar(Max)
+  Mobile_Phone_Number          String? @db.VarChar(Max)
+  N_mero_Casa                  String? @map("Número_Casa") @db.VarChar(Max)
+  Origem_da_Venda_Canal        String? @db.VarChar(Max)
+  Status_do_Cliente            String? @db.VarChar(Max)
+  Status_Financeiro            String? @db.VarChar(Max)
+  Telefone                     String? @db.VarChar(Max)
+  UF                           String? @db.VarChar(Max)
+  State                        String? @db.VarChar(Max)
+  IdFiliado                    String? @db.VarChar(Max)
+  Last_Modified_Date           String? @db.VarChar(Max)
+  Recent_Conversion_Date       String? @db.VarChar(Max)
+  Origem_do_Lead               String? @db.VarChar(Max)
+  Lead_Status                  String? @db.VarChar(Max)
+  Status_do_Lead               String? @db.VarChar(Max)
+  Finalizado_Lead              String? @db.VarChar(Max)
+  Tipo_de_Vendedor             String? @db.VarChar(Max)
+  Canal_de_Vendas_CDT          String? @db.VarChar(Max)
+  Data_Fim_Teste_Gr_tis        String? @map("Data_Fim_Teste_Grátis") @db.VarChar(Max)
+  Pacote                       String? @db.VarChar(Max)
+  Voucher                      String? @db.VarChar(Max)
+  Vouchers_PREPARA             String? @db.VarChar(Max)
+  ConciliadorVisualizar        String? @db.VarChar(Max)
+  Tipo_Lead_Cl_nica            String? @map("Tipo_Lead_Clínica") @db.VarChar(Max)
+  Filiado_CTN                  String? @db.VarChar(Max)
+  Status_do_Filiado_CDT        String? @db.VarChar(Max)
+  Status_do_Filiado            String? @db.VarChar(Max)
+  Link_de_Concilia__o_Reduzido String? @map("Link_de_Conciliação_Reduzido") @db.VarChar(Max)
+  Leads_de_hoje                String? @db.VarChar(Max)
+  Pipeline_perdido             String? @db.VarChar(Max)
+  Tem_ticket                   String? @db.VarChar(Max)
+  Tem_Neg_cio                  String? @map("Tem_Negócio") @db.VarChar(Max)
+  Data_Assinatura              String? @db.VarChar(Max)
+  Associated_Company_ID        String? @db.VarChar(Max)
+  Associated_Company           String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ControleHugMe {
+  CountRequest     Int?
+  TimeRequestBegin DateTime? @db.DateTime
+  TimeRequestEnd   DateTime? @db.DateTime
+  HoldRequest      String?   @db.VarChar(1)
+
+  @@ignore
+}
+
+model DadosContatosHS {
+  Id               Int       @id(map: "PK_DadosContatosHS") @default(autoincrement())
+  IdContatoHubSpot Int
+  Dt_EmissaoCartao DateTime? @db.DateTime
+  Telefone         String?   @db.VarChar(50)
+  Celular          String?   @db.VarChar(50)
+  Recencia         Int?
+  Frequencia       Int?
+  Valor            Int?
+  FV               Int?
+  SaldoCashBack    Decimal?  @db.Decimal(18, 2)
+  Dt_Aceite        DateTime? @db.DateTime
+  Dt_UltimoAcesso  DateTime? @db.DateTime
+  Qtd_AcessosApp   Int?
+  PossuiCashBack   Boolean?
+  Dt_UltimaCompra  DateTime? @db.DateTime
+  Segmento         String?   @db.VarChar(100)
+}
+
+model DesfiliacaoMassa {
+  Id                             Int       @id(map: "PK__Desfilia__3214EC07A8FFA7C5") @default(autoincrement())
+  IdFiliado                      Int?
+  IdTicket                       Int?
+  IdContato                      Int?
+  Referencia                     String?   @db.VarChar(15)
+  Quantidade_Meses_Inadimplente  Int?      @map("Quantidade Meses Inadimplente")
+  First_Name                     String?   @map("First Name") @db.VarChar(300)
+  Last_Name                      String?   @map("Last Name") @db.VarChar(300)
+  Email                          String?   @db.VarChar(120)
+  mobilephone                    String?   @db.VarChar(30)
+  phone                          String?   @db.VarChar(30)
+  CPF                            String?   @db.VarChar(15)
+  Ticket_owner                   Int?      @map("Ticket owner")
+  Contact_owner                  Int?      @map("Contact owner")
+  Franquia___Contato_Concilia__o String?   @map("Franquia - Contato Conciliação") @db.VarChar(300)
+  Ultima_forma_de_Pagamento      String?   @map("Ultima forma de Pagamento") @db.VarChar(300)
+  Ticket_name                    String?   @map("Ticket name") @db.VarChar(30)
+  Pipeline                       Int?
+  Ticket_status                  Int?      @map("Ticket status")
+  Priority                       String?   @db.VarChar(300)
+  Tipo_de_cancelamento           String?   @map("Tipo de cancelamento") @db.VarChar(300)
+  Fonte                          String?   @db.VarChar(300)
+  Tipo_de_T_quete                String?   @map("Tipo de Tíquete") @db.VarChar(300)
+  Status_Financeiro              String?   @map("Status Financeiro") @db.VarChar(300)
+  Observa__o                     String?   @map("Observação") @db.Text
+  Descricao                      String?   @db.Text
+  Importado                      Boolean?
+  Resultado                      Int?
+  Idfranquia                     Int?
+  Origem                         String?   @db.VarChar(30)
+  StatusHomologacao              String?   @db.VarChar(Max)
+  DtFiliacao                     DateTime? @db.DateTime
+  Vendedor                       String?   @db.VarChar(Max)
+  DataAtualizacao                DateTime? @db.DateTime
+  ColunaDM                       Int?
+  Fechado                        Boolean?
+  Excluido                       Boolean?
+}
+
+model DesfiliacaoMassaCVF {
+  Id                             Int       @id(map: "PK__Desfilia__3214EC07810D8F2D") @default(autoincrement())
+  idFiliado                      Int?
+  IdTicket                       Int?
+  IdContato                      Int?
+  Referencia                     String?   @db.VarChar(15)
+  Quantidade_Meses_Inadimplente  Int?      @map("Quantidade Meses Inadimplente")
+  First_Name                     String?   @map("First Name") @db.VarChar(300)
+  Last_Name                      String?   @map("Last Name") @db.VarChar(300)
+  Email                          String?   @db.VarChar(120)
+  mobilephone                    String?   @db.VarChar(30)
+  phone                          String?   @db.VarChar(30)
+  CPF                            String?   @db.VarChar(15)
+  Ticket_owner                   Int?      @map("Ticket owner")
+  Contact_owner                  Int?      @map("Contact owner")
+  Franquia___Contato_Concilia__o String?   @map("Franquia - Contato Conciliação") @db.VarChar(300)
+  Ultima_forma_de_Pagamento      String?   @map("Ultima forma de Pagamento") @db.VarChar(300)
+  Ticket_name                    String?   @map("Ticket name") @db.VarChar(30)
+  Pipeline                       Int?
+  Ticket_status                  Int?      @map("Ticket status")
+  Priority                       String?   @db.VarChar(300)
+  Tipo_de_cancelamento           String?   @map("Tipo de cancelamento") @db.VarChar(300)
+  Fonte                          String?   @db.VarChar(300)
+  Tipo_de_T_quete                String?   @map("Tipo de Tíquete") @db.VarChar(300)
+  Status_Financeiro              String?   @map("Status Financeiro") @db.VarChar(300)
+  Observa__o                     String?   @map("Observação") @db.Text
+  Descricao                      String?   @db.Text
+  Importado                      Boolean?
+  Resultado                      Int?
+  Idfranquia                     Int?
+  Origem                         String?   @db.VarChar(30)
+  StatusHomologacao              String?   @db.VarChar(Max)
+  DtFiliacao                     DateTime? @db.DateTime
+  Vendedor                       String?   @db.VarChar(Max)
+  DataAtualizacao                DateTime? @db.DateTime
+  ColunaDM                       Int?
+  Fechado                        Boolean?
+  Excluido                       Boolean?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model DisparoMassaTwilio {
+  Id          Int     @id @default(autoincrement())
+  Numero      String? @db.VarChar(50)
+  NomeTitular String? @db.VarChar(150)
+  Id_Pessoa   Int?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model DUPLICIDADE11MESES {
+  Ticket_ID                      String?   @map("Ticket ID") @db.NVarChar(255)
+  Nome_do_t_quete                String?   @map("Nome do tíquete") @db.NVarChar(255)
+  Pipeline                       String?   @db.NVarChar(255)
+  Status_do_t_quete              String?   @map("Status do tíquete") @db.NVarChar(255)
+  Data_de_cria__o                DateTime? @map("Data de criação") @db.DateTime
+  Prioridade                     String?   @db.NVarChar(255)
+  Propriet_rio_do_t_quete        String?   @map("Proprietário do tíquete") @db.NVarChar(255)
+  Fonte                          String?   @db.NVarChar(255)
+  Data_da__ltima_atividade       String?   @map("Data da última atividade") @db.NVarChar(255)
+  Franquia___Contato_Concilia__o String?   @map("Franquia - Contato Conciliação") @db.NVarChar(255)
+  colunaDM                       String?   @db.NVarChar(255)
+  IdFiliado                      String?   @db.NVarChar(255)
+  Associated_Company_ID          String?   @map("Associated Company ID") @db.NVarChar(255)
+  Associated_Company             String?   @map("Associated Company") @db.NVarChar(255)
+  Associated_Contact_IDs         String?   @map("Associated Contact IDs") @db.NVarChar(255)
+  Associated_Contacts            String?   @map("Associated Contacts") @db.NVarChar(255)
+  Associated_Deal_IDs            String?   @map("Associated Deal IDs") @db.NVarChar(255)
+  Associated_Deals               String?   @map("Associated Deals") @db.NVarChar(255)
+
+  @@ignore
+}
+
+model FILIADO {
+  ID_FILIADO     Int       @id(clustered: false, map: "PK_FILIADO")
+  ID_PESSOA      BigInt
+  MATRICULA      String?   @db.VarChar(15)
+  ID_FRANQUIA    Int
+  DT_FILIACAO    DateTime? @db.DateTime
+  Id             Int       @default(autoincrement())
+  ATIVO          Int?
+  ID_FILIADO_PAI Int?
+}
+
+model FILIADOS_STATUS_HOMOLOGACAO {
+  ID_FILIADOS_STATUS_HOMOLOGACAO Int       @id(map: "PK__FILIADOS__0365807F3CAEFF24") @default(autoincrement())
+  BANCO                          String?   @db.VarChar(20)
+  ID_FILIADO                     Int?
+  MATRICULA                      String?   @db.VarChar(20)
+  STATUS_ATUAL                   Int?
+  DATA_FILIACAO                  DateTime? @db.DateTime
+  FLAG_REFILIADO                 Int?
+  FLAG_HOMOLOGADO                Int?
+  DATA_HOMOLOGACAO               DateTime? @db.DateTime
+  DATA_HORA_CARGA                DateTime? @db.DateTime
+}
+
+model FranquiaClinica {
+  IdClinica   Int?
+  NomeUnidade String? @db.VarChar(150)
+  Cidade      String? @db.VarChar(50)
+  IdCTN       Int?
+  Id          Int     @id(map: "PK_FranquiaClinica") @default(autoincrement())
+  Sistema     String? @db.VarChar(10)
+}
+
+model franquiaCTN {
+  ID_FRANQUIA                   Int
+  ID_SUB_FRANQUIA               Int?
+  MATRICULA                     String?   @db.NVarChar(15)
+  NOME_FANTASIA                 String    @db.NVarChar(50)
+  CNPJ                          String    @db.VarChar(18)
+  RAZAO_SOCIAL                  String    @db.VarChar(150)
+  INSC_ESTADUAL                 String?   @db.VarChar(50)
+  ID_LOGRADOURO                 Int?
+  NUMERO                        String?   @db.NChar(10)
+  COMPLEMENTO                   String?   @db.NVarChar(100)
+  ATIVO                         Int
+  CONTATO_NOME                  String    @db.VarChar(150)
+  CONTATO_TELEFONE              String    @db.VarChar(15)
+  CONTATO_EMAIL                 String    @db.VarChar(150)
+  IND_GERAR_COBRANCA            Boolean?
+  ID_PROMOTORVENDAS_DEFAULT     Int?
+  TEL_CLINICA                   String?   @db.NVarChar(15)
+  CEP                           String?   @db.VarChar(8)
+  ENDERECO                      String?   @db.VarChar(100)
+  BAIRRO                        String?   @db.VarChar(100)
+  CIDADE                        String?   @db.VarChar(50)
+  UF                            String?   @db.Char(2)
+  LATITUDE                      Float?
+  LONGITUDE                     Float?
+  ID_TIPO_FRANQUIA              Int?
+  ID_SEGURADORA                 Int?
+  UNIDADE                       String?   @db.VarChar(50)
+  ID_USUARIO                    Int?
+  DT_ALTERACAO                  DateTime? @db.DateTime
+  DATA_LIMITE_PILOTO            DateTime? @db.DateTime
+  ID_USUARIO_LIBERACAO_COBRANCA Int?
+  DT_INICIO_ENVIO_COBRANCA      DateTime? @db.DateTime
+  DT_CRIACAO_FRANQUIA           DateTime? @db.DateTime
+  DistanciaKM                   Float?
+  Id                            Int       @id(map: "PK_franquiaCTN") @default(autoincrement())
+}
+
+model FranquiaHub {
+  Id               Int      @id(map: "PK__Franquia__3214EC07AC156AE1") @default(autoincrement())
+  IdCTN            Int?
+  NomeFranquia     String?  @db.VarChar(100)
+  NomeProprietario String?  @db.VarChar(100)
+  EmailHub         String?  @db.VarChar(100)
+  Owner            Int?
+  Ativo            Boolean?
+  IdSub            Int?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model FranquiaHubCVF {
+  IdCVF            Int
+  NomeFranquia     String @db.VarChar(Max)
+  NomeProprietario String @db.VarChar(Max)
+  EmailHub         String @db.VarChar(Max)
+  Owner            Int
+  Ativo            String @db.VarChar(50)
+  IdSub            Int
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model FranquiaPilotoHomologacao {
+  Id               Int      @default(autoincrement())
+  IdCTN            Int?
+  NomeFranquia     String?  @db.VarChar(100)
+  NomeProprietario String?  @db.VarChar(100)
+  EmailHub         String?  @db.VarChar(100)
+  Owner            Int?
+  Ativo            Boolean?
+  IdSub            Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model FranquiasPiloto {
+  IdCTN        Int?
+  IdRegional   Int?
+  Nome         String?  @db.VarChar(100)
+  Onboarding   Boolean?
+  Inadimplente Boolean?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model FranquiasPilotoInadimplenteCVF {
+  IdCTN      Int?
+  IdRegional Int?
+  Nome       String? @db.VarChar(100)
+
+  @@ignore
+}
+
+model FranquiasPilotoRefiliacao {
+  IdCTN      Int?
+  IdRegional Int?
+  Nome       String? @db.VarChar(100)
+  id         Int     @id(map: "PK_FranquiasPilotoRefiliacao") @default(autoincrement())
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model FRCOM {
+  ID_PACIENTE       Int?
+  ID_CLINICA        Int?
+  DATA_CADASTRO     DateTime? @db.DateTime
+  NOME_PACIENTE     String?   @db.VarChar(Max)
+  DT_NASCIMENTO     DateTime? @db.DateTime
+  UF                String?   @db.VarChar(5)
+  TELEFONE          String?   @db.VarChar(Max)
+  CELULAR           String?   @db.VarChar(Max)
+  EMAIL             String?   @db.VarChar(Max)
+  CPF               String?   @db.VarChar(Max)
+  ENDERECO          String?   @db.VarChar(Max)
+  NUMERO            String?   @db.VarChar(Max)
+  COMPLEMENTO       String?   @db.VarChar(Max)
+  BAIRRO            String?   @db.VarChar(Max)
+  MUNICIPIO         String?   @db.VarChar(Max)
+  CEP               String?   @db.VarChar(Max)
+  SEXO              String?   @db.VarChar(Max)
+  STATUS_AGENDA     String?   @db.VarChar(Max)
+  TIPO_PROCEDIMENTO String?   @db.VarChar(Max)
+  CONVENIO          String?   @db.VarChar(Max)
+
+  @@ignore
+}
+
+model Homologacao {
+  IdFiliado                  Int?
+  IdTicket                   Int?
+  IdContato                  Int?
+  Referencia                 String?   @db.VarChar(30)
+  FirstName                  String?   @db.VarChar(Max)
+  LastName                   String?   @db.VarChar(Max)
+  DataFiliacao               DateTime? @db.DateTime
+  Email                      String?   @db.VarChar(350)
+  MobilePhone                String?   @db.VarChar(65)
+  Phone                      String?   @db.VarChar(65)
+  CPF                        String?   @db.VarChar(14)
+  TicketOwner                Int?
+  ContactOwner               Int?
+  FranquiaContatoConciliacao String?   @db.VarChar(500)
+  UltimaFormaPagamento       String?   @db.VarChar(500)
+  FormaPai                   Int?
+  TicketName                 String?   @db.VarChar(300)
+  Pipeline                   Int?
+  TicketStatus               Int?
+  QtdeDias                   Int?
+  Fonte                      String?   @db.VarChar(300)
+  TipoTiquete                String?   @db.VarChar(350)
+  StatusFinanceiro           String?   @db.VarChar(350)
+  Observacao                 String?   @db.VarChar(Max)
+  StatusdoLead               String?   @db.VarChar(300)
+  Descricao                  String?   @db.VarChar(Max)
+  Importado                  Boolean?
+  Fechado                    Boolean?
+  DataEntrada                DateTime? @db.DateTime
+  Sistema                    String?   @db.VarChar(10)
+  Id                         Int       @id(map: "PK_Homologacao") @default(autoincrement())
+  DataFechamento             DateTime? @db.DateTime
+  DataAtualizacao            DateTime? @db.DateTime
+  Excluido                   Boolean?
+  IdFranquia                 Int?
+  Status                     String?   @db.VarChar(Max)
+  Priority                   String?   @db.VarChar(50)
+  Bairro                     String?   @db.VarChar(50)
+  CEP                        String?   @db.VarChar(50)
+  Cidade                     String?   @db.VarChar(300)
+  Complemento                String?   @db.VarChar(300)
+  DataNascimento             DateTime? @db.DateTime
+  Endereco                   String?   @db.VarChar(300)
+  EstadoCivil                String?   @db.VarChar(50)
+  HsLeadStatus               String?   @db.VarChar(50)
+  IdPessoa                   Int?
+  Matricula                  String?   @db.VarChar(50)
+  Numero                     String?   @db.VarChar(50)
+  Origem                     String?   @db.VarChar(50)
+  Sexo                       String?   @db.VarChar(50)
+  UF                         String?   @db.VarChar(50)
+  Vendedor                   String?   @db.VarChar(300)
+}
+
+model HOMOLOGACAO_CONCLUIDO {
+  ID                          Int       @id(map: "PK__HOMOLOGA__3214EC27620FC459") @default(autoincrement())
+  BANCO                       String?   @db.VarChar(10)
+  ID_FILIADO                  Int?
+  ID_CONTRATO                 Int?
+  DT_CONTRATO                 DateTime? @db.DateTime
+  MENSALIDADE1                String?   @db.VarChar(7)
+  MENSALIDADE1_DT_HOMOLOGACAO DateTime? @db.DateTime
+  MENSALIDADE2                String?   @db.VarChar(7)
+  MENSALIDADE2_DT_HOMOLOGACAO DateTime? @db.DateTime
+  STATUS_CONTRATO             Int?
+  DT_ATUALIZACAO              DateTime? @db.DateTime
+
+  @@index([ID], map: "index1")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Homologacao_id {
+  ID_FILIADO      Int
+  SituacaoEntrave String @db.VarChar(Max)
+
+  @@ignore
+}
+
+model HOMOLOGACAO_PRIMEIRA_MENSALIDADE {
+  ID                     Int       @id(map: "PK__HOMOLOGA__3214EC277E33D76D") @default(autoincrement())
+  BANCO                  String?   @db.VarChar(10)
+  ID_FILIADO             Int?
+  DT_FILIACAO            DateTime? @db.DateTime
+  ID_CONTRATO            Int?
+  DT_CONTRATO            DateTime? @db.DateTime
+  DT_HOMOLOGACAO         DateTime? @db.DateTime
+  DT_MES_ANO_COMPETENCIA String?   @db.VarChar(7)
+  FLAG_REFILIADO         Int?
+  STATUS_FILIADO         Int?
+  STATUS_CONTRATO        Int?
+  DT_ATUALIZACAO         DateTime? @db.DateTime
+}
+
+model Inadimplentes {
+  Id                          Int       @id(map: "PK__Inadimpl__3214EC07A5E781FC") @default(autoincrement())
+  IdFiliado                   Int?
+  IdTicket                    Int?
+  IdContact                   Int?
+  Referencia                  String?   @db.VarChar(15)
+  QuantidadeMesesInadimplente Int?
+  FirstName                   String?   @db.VarChar(300)
+  LastName                    String?   @db.VarChar(300)
+  Email                       String?   @db.VarChar(120)
+  MobilePhone                 String?   @db.VarChar(30)
+  Phone                       String?   @db.VarChar(30)
+  CPF                         String?   @db.VarChar(15)
+  TicketOwner                 Int?
+  ContactOwner                Int?
+  FranquiaContatoConciliacao  String?   @db.VarChar(100)
+  UltimaFormaPagamento        String?   @db.VarChar(100)
+  TicketName                  String?   @db.VarChar(30)
+  Pipeline                    Int?
+  TicketStatus                Int?
+  Priority                    String?   @db.VarChar(10)
+  Fonte                       String?   @db.VarChar(50)
+  TipoTiquete                 String?   @db.VarChar(50)
+  StatusFinanceiro            String?   @db.VarChar(50)
+  Observacao                  String?   @db.Text
+  Descricao                   String?   @db.Text
+  Importado                   Boolean?
+  Fechado                     Boolean?
+  DataEntrada                 DateTime? @db.DateTime
+  DataFechamento              DateTime? @db.DateTime
+  Atualizar                   Boolean?
+  QtdeDias                    Int?
+  ValorDivida                 Float?    @db.Money
+  IdFranquia                  Int?
+  Origem                      String?   @db.VarChar(30)
+  StatusHomologacao           String?   @db.VarChar(50)
+  Vendedor                    String?   @db.VarChar(100)
+  HsLeadStatus                String?   @db.VarChar(50)
+  DataNascimento              DateTime? @db.DateTime
+  Sexo                        String?   @db.VarChar(1)
+  IdPessoa                    Int?
+  DataFiliacao                DateTime? @db.DateTime
+  CEP                         String?   @db.VarChar(11)
+  Bairro                      String?   @db.VarChar(100)
+  Cidade                      String?   @db.VarChar(150)
+  Numero                      String?   @db.VarChar(10)
+  Complemento                 String?   @db.VarChar(50)
+  EstadoCivil                 String?   @db.VarChar(30)
+  UF                          String?   @db.VarChar(5)
+  Endereco                    String?   @db.VarChar(200)
+  ColunaDM                    Int?
+  LinkConciliacao             String?   @db.VarChar(100)
+  LinkConciliacaoReduzido     String?   @db.VarChar(50)
+  Excluido                    Boolean?
+  Sistema                     String?   @db.VarChar(5)
+  ValorArrecadado             Float?    @db.Money
+  DataBaixa                   DateTime? @db.DateTime
+  DataImportado               DateTime? @db.DateTime
+
+  @@index([IdFiliado, IdTicket, IdContact, IdPessoa], map: "Ids_Index")
+  @@index([CPF, Email, FranquiaContatoConciliacao, UltimaFormaPagamento], map: "Text_Index")
+}
+
+model InadimplentesDiariosBI {
+  ID                  BigInt    @id(map: "PK__Inadimpl__3214EC27D1D12FCD") @default(autoincrement())
+  nome_franquia       String?   @db.VarChar(100)
+  nome_regional       String?   @db.VarChar(100)
+  matricula           String?   @db.VarChar(100)
+  quantidade_de_meses Int?
+  nome                String?   @db.VarChar(250)
+  email               String?   @db.VarChar(100)
+  celular             String?   @db.VarChar(15)
+  meio_arrecadacao    String?   @db.VarChar(30)
+  forma_pagamento     String?   @db.VarChar(50)
+  promotor_venda      String?   @db.VarChar(250)
+  data_filacao        DateTime? @db.DateTime
+  IdFiliado           Int?
+}
+
+model LeadClinica {
+  Id                          Int       @id(map: "PK_LeadClinica") @default(autoincrement())
+  IdFranquia                  Int?
+  IdFiliado                   Int?
+  IdPessoa                    Int?
+  IdContact                   Int?
+  QuantidadeMesesInadimplente Int?
+  FirstName                   String?   @db.VarChar(255)
+  LastName                    String?   @db.VarChar(Max)
+  Email                       String?   @db.VarChar(255)
+  MobilePhone                 String?   @db.VarChar(30)
+  Phone                       String?   @db.VarChar(30)
+  CPF                         String?   @db.VarChar(12)
+  ContactOwner                Int?
+  Franquia                    String?   @db.VarChar(Max)
+  UltimaFormaPagamento        String?   @db.VarChar(Max)
+  OrigemDoLead                String?   @db.VarChar(40)
+  StatusFinanceiro            String?   @db.VarChar(40)
+  NomeClinica                 String?   @db.VarChar(Max)
+  Convenio                    String?   @db.VarChar(Max)
+  TipoProcedimento            String?   @db.VarChar(Max)
+  StatusAgenda                String?   @db.VarChar(15)
+  Matricula                   String?   @db.VarChar(15)
+  DataFiliacao                DateTime? @db.DateTime
+  TipoFiliado                 String?   @db.VarChar(Max)
+  Status                      String?   @db.VarChar(Max)
+  ValorDivida                 Float?    @db.Money
+  TipoLeadClinica             String?   @db.VarChar(Max)
+  DataNascimento              DateTime? @db.Date
+  EstadoCivil                 String?   @db.VarChar(30)
+  Sexo                        String?   @db.VarChar(10)
+  CEP                         String?   @db.VarChar(20)
+  Endereco                    String?   @db.VarChar(Max)
+  Bairro                      String?   @db.VarChar(Max)
+  Numero                      String?   @db.VarChar(Max)
+  Complemento                 String?   @db.VarChar(Max)
+  Cidade                      String?   @db.VarChar(Max)
+  UF                          String?   @db.VarChar(10)
+  StatusDoLead                String?   @db.VarChar(50)
+  DataAgendamento             DateTime? @db.Date
+  Fechado                     Boolean?
+  Importado                   Boolean?
+  DataEntrada                 DateTime? @db.DateTime
+  DataFechamento              DateTime? @db.DateTime
+  DataMarcacao                DateTime? @db.Date
+  Sistema                     String?   @db.VarChar(20)
+  Filial                      String?   @db.VarChar(255)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model LeadsFranquiasTelevendas {
+  Deal_ID                                 String    @db.VarChar(50)
+  Data_mudan_a_para_Contato_Sem_Sucesso   DateTime? @map("Data_mudança_para_Contato_Sem_Sucesso")
+  Last_Modified_Date                      DateTime?
+  Pipeline                                String?   @db.VarChar(50)
+  Email_do_solicitante                    String?   @db.VarChar(Max)
+  Cidade                                  String?   @db.VarChar(Max)
+  Nome_do_Solicitante                     String?   @db.VarChar(Max)
+  Data_mudan_a_para_Contato_Em_Negocia__o DateTime? @map("Data_mudança_para_Contato_Em_Negociação")
+  Motivo_de_Fechamento_Perdido_CDT        String?   @db.VarChar(Max)
+  Close_Date                              DateTime?
+  Data_mudan_a_para_Neg_cio_Perdido       DateTime? @map("Data_mudança_para_Negócio_Perdido")
+  FranquiaCTN                             String?   @db.VarChar(Max)
+  Celular_Lead                            String?   @db.VarChar(Max)
+  Create_Date                             DateTime?
+  Motivo_do_contato_sem_Sucesso           String?   @db.VarChar(Max)
+  Telefone                                String?   @db.VarChar(Max)
+  Deal_Stage                              String?   @db.VarChar(Max)
+  Nome_do_Cliente                         String?   @db.VarChar(Max)
+  CPF                                     String?   @db.VarChar(Max)
+  Origem_do_Lead                          String?   @db.VarChar(Max)
+  Associated_Contact_IDs                  String?   @db.VarChar(Max)
+  Associated_Contacts                     String?   @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model LevantamentoPersona {
+  IdFiliado      Int?
+  Ano            Int?
+  Mes            Int?
+  Regional       String? @db.VarChar(100)
+  Estado         String? @db.VarChar(2)
+  Idade          Int?
+  Sexo           String? @db.VarChar(50)
+  Titular        String? @db.VarChar(3)
+  QtdDependentes Int?
+  TipoDependente String? @db.VarChar(50)
+  EstadoCivil    String? @db.VarChar(50)
+  TemCelular     String? @db.VarChar(3)
+  TemEmail       String? @db.VarChar(3)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model LevantamentoPersonaDep {
+  IdFiliadoDependente Int?
+  IdFiliadoPai        Int?
+  Ano                 Int?
+  Mes                 Int?
+  Regional            String? @db.VarChar(100)
+  Estado              String? @db.VarChar(2)
+  Idade               Int?
+  Sexo                String? @db.VarChar(50)
+  Titular             String? @db.VarChar(3)
+  QtdDependentes      Int?
+  TipoDependente      String? @db.VarChar(50)
+  EstadoCivil         String? @db.VarChar(50)
+  TemCelular          String? @db.VarChar(3)
+  TemEmail            String? @db.VarChar(3)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model MapaConciliacao7A12 {
+  Id                         Int       @default(autoincrement())
+  IdFiliado                  Int?
+  Matricula                  String?   @db.VarChar(15)
+  IdContatoHubSpot           Int?
+  IdFranquia                 Int?
+  FranquiaContatoConciliacao String?   @db.VarChar(100)
+  TicketOwner                Int?
+  Finalizado                 Boolean?
+  Atualizado                 Boolean?
+  DtAtualizacao              DateTime? @db.DateTime
+  IdTicketMes7               Int?
+  IdTicketMes8               Int?
+  IdTicketMes9               Int?
+  IdTicketMes10              Int?
+  IdTicketMes11              Int?
+  IdTicketMes12              Int?
+  TotalMensAberto            Int?
+  ValorDivida                String?   @db.VarChar(20)
+  IdFormaPagto               Int?
+  NomeFormaPagto             String?   @db.VarChar(100)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model MapaHomologacao {
+  Id                            Int       @default(autoincrement())
+  IdFiliado                     Int?
+  IdContact                     Int?
+  Referencia                    String?   @db.VarChar(15)
+  FirstName                     String?   @db.VarChar(300)
+  LastName                      String?   @db.VarChar(Max)
+  Email                         String?   @db.VarChar(120)
+  MobilePhone                   String?   @db.VarChar(30)
+  Phone                         String?   @db.VarChar(30)
+  CPF                           String?   @db.VarChar(15)
+  ContactOwner                  Int?
+  FranquiaContatoConciliacao    String?   @db.VarChar(100)
+  FormaPagamentoContrato        String?   @db.VarChar(100)
+  FormaPagamentoRecebimento     String?   @db.VarChar(100)
+  Matricula                     String?   @db.VarChar(30)
+  Importado                     Boolean?
+  Fechado                       Boolean?
+  DataEntrada                   DateTime? @db.DateTime
+  DataFechamento                DateTime? @db.DateTime
+  IdFranquia                    Int?
+  StatusHomologacao             String?   @db.VarChar(50)
+  DataNascimento                DateTime? @db.DateTime
+  Sexo                          String?   @db.VarChar(1)
+  IdPessoa                      Int?
+  DataFiliacao                  DateTime? @db.DateTime
+  CEP                           String?   @db.VarChar(11)
+  Bairro                        String?   @db.VarChar(100)
+  Cidade                        String?   @db.VarChar(150)
+  Numero                        String?   @db.VarChar(10)
+  Complemento                   String?   @db.VarChar(300)
+  EstadoCivil                   String?   @db.VarChar(30)
+  UF                            String?   @db.VarChar(5)
+  Endereco                      String?   @db.VarChar(Max)
+  Excluido                      Boolean?
+  Sistema                       String?   @db.VarChar(5)
+  SegundaMensalidadeArrecadada  Boolean?
+  PrimeiraMensalidadeArrecadada Boolean?
+  QtdMensalidadesPagas          Int?
+  ValorArrecadado               Float?    @db.Money
+
+  @@index([Id], map: "indexIdMapaHomologacao")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model MapaInadimplente {
+  Id                         Int       @default(autoincrement())
+  IdFiliado                  Int?
+  IdTicket                   Int?
+  IdContact                  Int?
+  IdFranquia                 Int?
+  QtdMesesInadimplente       Int?
+  TicketOwner                Int?
+  ContactOwner               Int?
+  Pipeline                   Int?
+  TicketStatus               Int?
+  ValorDivida                Float?    @db.Money
+  ValorArrecadado            Float?    @db.Money
+  Referencia                 String?   @db.VarChar(15)
+  FranquiaContatoConciliacao String?   @db.VarChar(100)
+  UltimaFormaPagamento       String?   @db.VarChar(100)
+  TicketName                 String?   @db.VarChar(30)
+  Priority                   String?   @db.VarChar(10)
+  Fonte                      String?   @db.VarChar(50)
+  TipoTiquete                String?   @db.VarChar(50)
+  StatusFinanceiro           String?   @db.VarChar(50)
+  Observacao                 String?   @db.Text
+  Descricao                  String?   @db.Text
+  MotivoRejeicao             String?   @db.Text
+  Importado                  Boolean?
+  Fechado                    Boolean?
+  Atualizar                  Boolean?
+  Excluido                   Boolean?
+  DataBaixa                  DateTime? @db.DateTime
+  DataImportado              DateTime? @db.DateTime
+  DataFiliacao               DateTime? @db.DateTime
+  DataFechamento             DateTime? @db.DateTime
+  DataEntrada                DateTime? @db.DateTime
+  DataAtualizado             DateTime? @db.DateTime
+  StatusHomologacao          String?   @db.VarChar(20)
+  IdPessoa                   Int?
+  SubFranquia                String?   @db.VarChar(50)
+  IdContatoHubSpot           Int?
+
+  @@index([Fechado], map: "SK01_MapaInadimplente")
+  @@index([Id], map: "SK02_MapaInadimplente")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model MapaNovosRejeitados {
+  Id                         Int       @default(autoincrement())
+  IdContato                  Int?
+  Referencia                 String?   @db.VarChar(15)
+  FirstName                  String?   @db.VarChar(300)
+  LastName                   String?   @db.VarChar(300)
+  DataFiliacao               DateTime? @db.DateTime
+  Email                      String?   @db.VarChar(120)
+  MobilePhone                String?   @db.VarChar(30)
+  Phone                      String?   @db.VarChar(30)
+  CPF                        String?   @db.VarChar(15)
+  ContactOwner               Int?
+  FranquiaContatoConciliacao String?   @db.VarChar(100)
+  FormaPagamento             String?   @db.VarChar(100)
+  TicketName                 String?   @db.VarChar(30)
+  Observacao                 String?   @db.VarChar(Max)
+  Importado                  Boolean?
+  Fechado                    Boolean?
+  DataEntrada                DateTime? @db.DateTime
+  Sistema                    String?   @db.VarChar(50)
+  DataFechamento             DateTime? @db.DateTime
+  Excluido                   Boolean?
+  IdFranquia                 Int?
+  Bairro                     String?   @db.VarChar(100)
+  CEP                        String?   @db.VarChar(11)
+  Cidade                     String?   @db.VarChar(150)
+  Complemento                String?   @db.VarChar(300)
+  DataNascimento             DateTime? @db.DateTime
+  Endereco                   String?   @db.VarChar(Max)
+  EstadoCivil                String?   @db.VarChar(30)
+  HsLeadStatus               String?   @db.VarChar(50)
+  IdPessoa                   Int?
+  Matricula                  String?   @db.VarChar(30)
+  Numero                     String?   @db.VarChar(30)
+  Sexo                       String?   @db.VarChar(1)
+  UF                         String?   @db.VarChar(50)
+  MotivoRejeicao             String?   @db.VarChar(Max)
+  ValorDivida                Float?    @db.Money
+  IdFiliado                  Int?
+  IdLancamento               Int?
+  NovoRejeitado              Boolean?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model MapaOnboarding {
+  Id                        Int       @default(autoincrement())
+  TicketId                  Int?
+  IdContact                 Int?
+  IdFiliado                 Int?
+  FranquiaContatoConcTicket String?   @db.VarChar(100)
+  EmailContactTicket        String?   @db.VarChar(120)
+  CellphoneContactTicket    String?   @db.VarChar(30)
+  MobilePhoneContactTicket  String?   @db.VarChar(30)
+  NameTicket                String?   @db.VarChar(15)
+  DateFiliacaoContatoTicket DateTime? @db.DateTime
+  OwnerTicket               Int?
+  TypeTicket                String?   @db.VarChar(15)
+  DescriptionTicket         String?   @db.VarChar(Max)
+  PriorityTicket            String?   @db.VarChar(30)
+  StatusTicket              Int?
+  PipelineTicket            Int?
+  Contrato                  Int?
+  Gravacoes                 String?   @db.VarChar(120)
+  C_END                     String?   @db.VarChar(3)
+  DOC                       String?   @db.VarChar(3)
+  ADS                       String?   @db.VarChar(3)
+  POV                       String?   @db.VarChar(3)
+  AUT                       String?   @db.VarChar(3)
+  RF_E_TITULAR              String?   @db.VarChar(15)
+  Dt_Ini                    DateTime? @db.DateTime
+  ConformidadeCadastral     String?   @db.VarChar(3)
+  InconformidadeCadastral   String?   @db.VarChar(3)
+
+  @@index([Id], map: "MapaOnboardingW01")
+  @@ignore
+}
+
+model MENSALIDADES_HOMOLOGADAS {
+  ID_STG_MENSALIDADES_HOMOLOGADAS Int       @id(map: "PK__MENSALID__24549CE9FBDC237E") @default(autoincrement())
+  BANCO                           String?   @db.VarChar(10)
+  ID_FILIADO                      Int?
+  DT_FILIACAO                     DateTime? @db.DateTime
+  ID_CONTRATO                     Int?
+  DT_CONTRATO                     DateTime? @db.DateTime
+  CONTRATO_MEIO_ARRECADACAO       String?   @db.VarChar(50)
+  CONTRATO_TIPO_FORMA_PGTO        Int?
+  FLAG_REFILIADO                  Int?
+  ID_LANCAMENTO                   Int?
+  DT_MES_ANO_COMPETENCIA          String?   @db.VarChar(7)
+  STATUS_LAN                      Int?
+  LANCAMENTO_MEIO_ARRECADACAO     String?   @db.VarChar(50)
+  LANCAMENTO_TIPO_FORMA_PGTO      Int?
+  DT_BAIXA                        DateTime? @db.DateTime
+  DT_FATURAMENTO                  DateTime? @db.DateTime
+  DT_HOMOLOGACAO                  DateTime? @db.DateTime
+  STATUS_FILIADO                  Int?
+  STATUS_CONTRATO                 Int?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Negocios1 {
+  Deal_ID                String  @db.VarChar(Max)
+  Deal_Name              String? @db.VarChar(Max)
+  Deal_Stage             String? @db.VarChar(Max)
+  Close_Date             String? @db.VarChar(Max)
+  Deal_owner             String? @db.VarChar(Max)
+  Amount                 String? @db.VarChar(Max)
+  Origem_do_Lead_CDT     String? @db.VarChar(Max)
+  Associated_Company_ID  String? @db.VarChar(Max)
+  Associated_Company     String? @db.VarChar(Max)
+  Associated_Contact_IDs String? @db.VarChar(Max)
+  Associated_Contacts    String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Negocios2 {
+  Deal_ID                String  @db.VarChar(Max)
+  Deal_Name              String? @db.VarChar(Max)
+  Deal_Stage             String? @db.VarChar(Max)
+  Close_Date             String? @db.VarChar(Max)
+  Deal_owner             String? @db.VarChar(Max)
+  Amount                 String? @db.VarChar(Max)
+  Origem_do_Lead_CDT     String? @db.VarChar(Max)
+  Associated_Company_ID  String? @db.VarChar(Max)
+  Associated_Company     String? @db.VarChar(Max)
+  Associated_Contact_IDs String? @db.VarChar(Max)
+  Associated_Contacts    String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model NegociosCDT24021 {
+  Deal_ID                String? @db.VarChar(Max)
+  Deal_Name              String? @db.VarChar(Max)
+  Deal_Stage             String? @db.VarChar(Max)
+  Close_Date             String? @db.VarChar(Max)
+  Deal_owner             String? @db.VarChar(Max)
+  Amount                 String? @db.VarChar(Max)
+  Create_Date            String? @db.VarChar(Max)
+  Leads_de_hoje          String? @db.VarChar(Max)
+  Associated_Company_ID  String? @db.VarChar(Max)
+  Associated_Company     String? @db.VarChar(Max)
+  Associated_Contact_IDs String? @db.VarChar(Max)
+  Associated_Contacts    String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model NegociosCDT24022 {
+  Deal_ID                String? @db.VarChar(Max)
+  Deal_Name              String? @db.VarChar(Max)
+  Deal_Stage             String? @db.VarChar(Max)
+  Close_Date             String? @db.VarChar(Max)
+  Deal_owner             String? @db.VarChar(Max)
+  Amount                 String? @db.VarChar(Max)
+  Create_Date            String? @db.VarChar(Max)
+  Leads_de_hoje          String? @db.VarChar(Max)
+  Associated_Company_ID  String? @db.VarChar(Max)
+  Associated_Company     String? @db.VarChar(Max)
+  Associated_Contact_IDs String? @db.VarChar(Max)
+  Associated_Contacts    String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+model Pipeline {
+  Id       Int     @id(map: "PK__Pipeline__3214EC07E6D16EA7") @default(autoincrement())
+  Pipeline Int?
+  Nome     String? @db.VarChar(30)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model PipelineStage {
+  IdPipeline   Int?
+  IdStage      Int?
+  DisplayOrder Int?
+  IsClosed     Boolean?
+  Label        String?  @db.VarChar(200)
+
+  @@ignore
+}
+
+model RAReclamacao {
+  Id                           Int       @id(map: "PK_RAReclamacaoNovo") @default(autoincrement())
+  ImportadoHS                  Boolean?
+  IdTicketHS                   Int?
+  Ativo                        Boolean?
+  Fonte                        String?   @db.VarChar(100)
+  IdStatusHugme                Int?
+  IdStatusReclameAQUI          Int?
+  IdPortal                     String?   @unique(map: "AK_IdPortal") @db.VarChar(100)
+  IdRA                         Int?
+  IdFranquia                   Int?
+  IdFiliado                    Int?
+  IdStage                      Int?
+  TituloReclamacao             String?   @db.VarChar(Max)
+  ConteudoReclamacao           String?   @db.VarChar(Max)
+  ConsideracaoFinalEmpresa     String?   @db.VarChar(Max)
+  ConsideracaoFinalCliente     String?   @db.VarChar(Max)
+  FoiEnviadaResposta           Boolean?
+  OTiqueteFoiAtendido          Boolean?
+  Fechado                      Boolean?
+  ProcessoInterno              Boolean?
+  MotivoSolicitacao            String?   @db.VarChar(Max)
+  TipoSolicitacao              String?   @db.VarChar(Max)
+  AbertaPorTerceiros           Boolean?
+  FoiSolicitadaModeracao       Boolean?
+  OTiqueteFoiModerado          Boolean?
+  AutorizadoSolicitarModeracao Boolean?
+  CodigoModeracao              Int?
+  MensagemModeracao            String?   @db.VarChar(Max)
+  DataCriacao                  DateTime? @db.DateTime
+  DataAnaliseFranquia          DateTime? @db.DateTime
+  DataAprovacaoOuvidoria       DateTime? @db.DateTime
+  DataPedidoModeracao          DateTime? @db.DateTime
+  DataConsideracaoEmpresa      DateTime? @db.DateTime
+  DataConsideracaoCliente      DateTime? @db.DateTime
+  DataCriacaoBanco             DateTime? @db.DateTime
+  IdCliente                    Int?
+  ProblemaResolvido            Boolean?
+  RespostaCliente              String?   @db.VarChar(Max)
+  ResultadoFinal               String?   @db.VarChar(200)
+  PedidoAvaliacao              Boolean?
+  NotaFinal                    Int?
+  VoltariaFazerNegocio         Boolean?
+  AvaliacaoSemResposta         Boolean?
+  AvaliadoSemRespostaDaEmpresa Boolean?
+  QuantidadeComentarios        Int?
+  Empresa                      String?   @db.VarChar(200)
+  TempoPrimeiraResposta        Int?
+  SentimentoConsumidor         String?   @db.VarChar(50)
+  Anexo                        String?   @db.VarChar(Max)
+  Congelada                    Boolean?
+  QuantidadeModeracao          Int?
+  IdHugme                      Int?
+  IdModeracao                  Int?
+  DataUltimaReplica            DateTime? @db.DateTime
+
+  @@unique([Id, IdPortal], map: "IX_RAReclamacao_IdPortal")
+}
+
+model RAReclamacaoMensagens {
+  Id                  Int       @id(map: "PK_RAReclamacaoReplica") @default(autoincrement())
+  IdRA                Int?
+  OrdemResposta       Int?
+  Mensagem            String?   @db.VarChar(Max)
+  ConsumidorRespondeu Boolean?
+  DataMensagem        DateTime? @db.Date
+  IdPortal            String?   @db.VarChar(50)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model RAStatusReclamacao {
+  Id         Int
+  Descriacao String? @db.VarChar(200)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model RAUploadAnexos {
+  Id            Int      @default(autoincrement())
+  IdTicketHS    Int?
+  Fonte         String?  @db.VarChar(100)
+  IdPortal      String?  @db.VarChar(100)
+  IdUpload      String?  @db.VarChar(100)
+  LinkAnexo     String?  @db.VarChar(250)
+  ArquivoBase64 String?  @db.VarChar(Max)
+  NomeAnexo     String?  @db.VarChar(100)
+  Anexado       Boolean?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Refiliacao {
+  Id                          Int       @default(autoincrement())
+  IdFiliado                   Int?
+  IdTicket                    Int?
+  IdPessoa                    Int?
+  IdContact                   Int?
+  Referencia                  String?   @db.VarChar(50)
+  QuantidadeMesesInadimplente Int?
+  ValorDivida                 Float?
+  FirstName                   String?   @db.VarChar(Max)
+  LastName                    String?   @db.VarChar(Max)
+  Email                       String?   @db.VarChar(Max)
+  MobilePhone                 String?   @db.VarChar(Max)
+  Phone                       String?   @db.VarChar(Max)
+  CPF                         String?   @db.VarChar(15)
+  DataNascimento              DateTime? @db.DateTime
+  TicketOwner                 Int?
+  ContactOwner                Int?
+  Regional                    String?   @db.VarChar(Max)
+  FranquiaContatoConciliacao  String?   @db.VarChar(Max)
+  IdFranquia                  Int?
+  UltimaFormaPagamento        String?   @db.VarChar(Max)
+  TicketName                  String?   @db.VarChar(50)
+  Pipeline                    Int?
+  TicketStatus                Int?
+  Priority                    String?   @db.VarChar(50)
+  Fonte                       String?   @db.VarChar(50)
+  TipoTicket                  String?   @db.VarChar(50)
+  StatusFinanceiro            String?   @db.VarChar(50)
+  Observacao                  String?   @db.VarChar(Max)
+  DataFiliacao                DateTime? @db.DateTime
+  CEP                         String?   @db.VarChar(50)
+  Endereco                    String?   @db.VarChar(Max)
+  Bairro                      String?   @db.VarChar(Max)
+  Cidade                      String?   @db.VarChar(Max)
+  Numero                      String?   @db.VarChar(50)
+  Complemento                 String?   @db.VarChar(Max)
+  UF                          String?   @db.VarChar(3)
+  EstadoCivil                 String?   @db.VarChar(50)
+  Sexo                        String?   @db.VarChar(20)
+  HsLeadStatus                String?   @db.VarChar(50)
+  FinalizadoLead              String?   @db.VarChar(50)
+  MotivoCancelamento          String?   @db.VarChar(Max)
+  TempoDesfiliado             String?   @db.VarChar(Max)
+  Origem                      String?   @db.VarChar(Max)
+  Importado                   Boolean?
+  fechado                     Boolean?
+  DataEntrada                 DateTime? @db.DateTime
+  DataFechamento              DateTime? @db.DateTime
+  Resultado                   Int?
+  Convenio                    String?   @db.VarChar(50)
+  Excluir                     Boolean?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Refiliacao_Excluir {
+  Ticket_ID              Int
+  Ticket_name            String? @db.VarChar(Max)
+  Pipeline               String? @db.VarChar(Max)
+  Ticket_status          String? @db.VarChar(Max)
+  Create_date            String? @db.VarChar(Max)
+  Priority               String? @db.VarChar(Max)
+  Ticket_owner           String? @db.VarChar(Max)
+  Source                 String? @db.VarChar(Max)
+  Last_activity_date     String? @db.VarChar(Max)
+  Close_date             String? @db.VarChar(Max)
+  CPF                    String? @db.VarChar(Max)
+  IdFiliado              String? @db.VarChar(Max)
+  Associated_Company_ID  String? @db.VarChar(Max)
+  Associated_Company     String? @db.VarChar(Max)
+  Associated_Contact_IDs String? @db.VarChar(Max)
+  Associated_Contacts    String? @db.VarChar(Max)
+  Associated_Deal_IDs    String? @db.VarChar(Max)
+  Associated_Deals       String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model RefiliacaoCVF {
+  Id                          Int       @default(autoincrement())
+  IdFiliado                   Int?
+  IdTicket                    Int?
+  IdPessoa                    Int?
+  IdContact                   Int?
+  Referencia                  String?   @db.VarChar(50)
+  QuantidadeMesesInadimplente Int?
+  ValorDivida                 Float?
+  FirstName                   String?   @db.VarChar(Max)
+  LastName                    String?   @db.VarChar(Max)
+  Email                       String?   @db.VarChar(Max)
+  MobilePhone                 String?   @db.VarChar(Max)
+  Phone                       String?   @db.VarChar(Max)
+  CPF                         String?   @db.VarChar(15)
+  DataNascimento              DateTime? @db.DateTime
+  TicketOwner                 Int?
+  ContactOwner                Int?
+  Regional                    String?   @db.VarChar(Max)
+  FranquiaContatoConciliacao  String?   @db.VarChar(Max)
+  IdFranquia                  Int?
+  UltimaFormaPagamento        String?   @db.VarChar(Max)
+  TicketName                  String?   @db.VarChar(50)
+  Pipeline                    Int?
+  TicketStatus                Int?
+  Priority                    String?   @db.VarChar(50)
+  Fonte                       String?   @db.VarChar(50)
+  TipoTicket                  String?   @db.VarChar(50)
+  StatusFinanceiro            String?   @db.VarChar(50)
+  Observacao                  String?   @db.VarChar(Max)
+  DataFiliacao                DateTime? @db.DateTime
+  CEP                         String?   @db.VarChar(50)
+  Endereco                    String?   @db.VarChar(Max)
+  Bairro                      String?   @db.VarChar(Max)
+  Cidade                      String?   @db.VarChar(Max)
+  Numero                      String?   @db.VarChar(50)
+  Complemento                 String?   @db.VarChar(Max)
+  UF                          String?   @db.VarChar(3)
+  EstadoCivil                 String?   @db.VarChar(50)
+  Sexo                        String?   @db.VarChar(20)
+  HsLeadStatus                String?   @db.VarChar(50)
+  FinalizadoLead              String?   @db.VarChar(50)
+  MotivoCancelamento          String?   @db.VarChar(Max)
+  TempoDesfiliado             String?   @db.VarChar(Max)
+  Origem                      String?   @db.VarChar(Max)
+  Importado                   Boolean?
+  fechado                     Boolean?
+  DataEntrada                 DateTime? @db.DateTime
+  DataFechamento              DateTime? @db.DateTime
+  Resultado                   Int?
+  Convenio                    String?   @db.VarChar(Max)
+  Excluir                     Boolean?
+
+  @@ignore
+}
+
+model RefiliacaoPiloto {
+  Id                          Int       @id(map: "PK_RefiliacaoPiloto") @default(autoincrement())
+  IdFiliado                   Int?
+  IdTicket                    Int?
+  IdPessoa                    Int?
+  IdContact                   Int?
+  Referencia                  String?   @db.VarChar(50)
+  QuantidadeMesesInadimplente Int?
+  ValorDivida                 Float?    @db.Money
+  FirstName                   String?   @db.VarChar(300)
+  LastName                    String?   @db.VarChar(300)
+  Email                       String?   @db.VarChar(120)
+  MobilePhone                 String?   @db.VarChar(100)
+  Phone                       String?   @db.VarChar(100)
+  CPF                         String?   @db.VarChar(15)
+  DataNascimento              DateTime? @db.DateTime
+  TicketOwner                 Int?
+  ContactOwner                Int?
+  Regional                    String?   @db.VarChar(500)
+  FranquiaContatoConciliacao  String?   @db.VarChar(500)
+  IdFranquia                  Int?
+  UltimaFormaPagamento        String?   @db.VarChar(500)
+  TicketName                  String?   @db.VarChar(50)
+  Pipeline                    Int?
+  TicketStatus                Int?
+  Priority                    String?   @db.VarChar(50)
+  Fonte                       String?   @db.VarChar(50)
+  TipoTicket                  String?   @db.VarChar(50)
+  StatusFinanceiro            String?   @db.VarChar(50)
+  Observacao                  String?   @db.Text
+  DataFiliacao                DateTime? @db.DateTime
+  CEP                         String?   @db.VarChar(50)
+  Endereco                    String?   @db.VarChar(300)
+  Bairro                      String?   @db.VarChar(150)
+  Cidade                      String?   @db.VarChar(150)
+  Numero                      String?   @db.VarChar(50)
+  Complemento                 String?   @db.VarChar(150)
+  UF                          String?   @db.VarChar(3)
+  EstadoCivil                 String?   @db.VarChar(50)
+  Sexo                        String?   @db.VarChar(20)
+  HsLeadStatus                String?   @db.VarChar(50)
+  FinalizadoLead              String?   @db.VarChar(50)
+  MotivoCancelamento          String?   @db.VarChar(300)
+  TempoDesfiliado             String?   @db.VarChar(100)
+  Origem                      String?   @db.VarChar(100)
+  Importado                   Boolean?
+  Fechado                     Boolean?
+  DataEntrada                 DateTime? @db.DateTime
+  DataFechamento              DateTime? @db.DateTime
+  Resultado                   Int?
+  Sistema                     String?   @db.VarChar(50)
+  Excluir                     Boolean?
+  DataDesfiliacao             DateTime? @db.DateTime
+  StatusFiliado               String?   @db.VarChar(50)
+
+  @@index([Fechado], map: "SW1_RefiliacaoPiloto_1")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ResultadosCalculadora {
+  Regional               String?  @db.VarChar(50)
+  franquia               String?  @db.VarChar(100)
+  email                  String?  @db.VarChar(100)
+  telefone               String?  @db.VarChar(100)
+  atendente              String?  @db.VarChar(100)
+  cep                    String?  @db.NVarChar(50)
+  cliente_foi_retido     Boolean?
+  course_area            String?  @db.VarChar(50)
+  data_preenchimento     String?  @db.VarChar(50)
+  emailColaborador       String?  @db.VarChar(50)
+  especialidade_health   String?  @db.VarChar(50)
+  franquia2              String?  @db.VarChar(50)
+  frequencia_gas         String?  @db.VarChar(50)
+  id_matricula           String?  @db.VarChar(50)
+  idColaborador          String?  @db.VarChar(50)
+  motivo                 String?  @db.VarChar(50)
+  nome                   String?  @db.VarChar(50)
+  nomeColaborador        String?  @db.VarChar(50)
+  opt_in_email           Boolean?
+  opt_in_sms             Boolean?
+  opt_in_termos          String?  @db.VarChar(50)
+  opt_in_whatsapp        Boolean?
+  perc_cash_energia      Int?     @db.TinyInt
+  perc_cash_farmacia     Int?     @db.TinyInt
+  perc_cash_phone        Int?     @db.TinyInt
+  perc_desc_energia      Int?     @db.TinyInt
+  perc_desc_farmacia     Int?     @db.TinyInt
+  perc_desc_gas          Int?     @db.TinyInt
+  tipo_medicamento       String?  @db.VarChar(50)
+  total_benef_course     Float?
+  total_benef_energia    Float?
+  total_benef_farmacia   Float?
+  total_benef_gas        Float?
+  total_benef_health     Int?     @db.SmallInt
+  total_benef_phone      Float?
+  vlr_benef_total_mensal Float?
+  vlr_cash_energia       Float?
+  vlr_cash_farmacia      Float?
+  vlr_cash_phone         Float?
+  vlr_desc_course        Float?
+  vlr_desc_energia       Float?
+  vlr_desc_farmacia      Float?
+  vlr_desc_gas           Float?
+  vlr_desc_health        Int?     @db.TinyInt
+  vlr_desc_phone         Float?
+  vlr_gasto_anual        Float?
+  vlr_gasto_mensal       Float?
+  vlr_mensal_course      Float?
+  vlr_mensal_energia     Int?     @db.SmallInt
+  vlr_mensal_farmacia    Float?
+  vlr_mensal_gas         Float?
+  vlr_mensal_health      Int?     @db.SmallInt
+  vlr_mensal_phone       Float?
+  vlr_total_cashback     Float?
+  vlr_total_desconto     Float?
+
+  @@ignore
+}
+
+model SMSTODOSEmpreendimentos {
+  body String? @db.VarChar(Max)
+  Id   Int     @id(map: "PK_SMSTODOSEmpreendimentos") @default(autoincrement())
+}
+
+model sysdiagrams {
+  name         String @db.NVarChar(128)
+  principal_id Int
+  diagram_id   Int    @id(map: "PK__sysdiagr__C2B05B6170A2911B") @default(autoincrement())
+  version      Int?
+  definition   Bytes?
+
+  @@unique([principal_id, name], map: "UK_principal_name")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Tabela_temp_clinicas {
+  idClinica   Int?
+  NomeUnidade String? @db.VarChar(150)
+  Cidade      String? @db.VarChar(150)
+  estado      String? @db.VarChar(5)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TEMP_AgendamentosApp {
+  cpf       String?   @db.VarChar(50)
+  id_pessoa String?   @db.VarChar(50)
+  data      DateTime? @db.Date
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TEMP_AtivacaoApp {
+  name                                 String?   @db.NVarChar(200)
+  email                                String?   @db.NVarChar(100)
+  cpf                                  String?   @db.NVarChar(50)
+  phone                                String?   @db.NVarChar(50)
+  cdt_id                               Int?
+  cdt_registration                     String?   @db.NVarChar(50)
+  has_registered                       Int?      @db.TinyInt
+  franchise                            String?   @db.NVarChar(100)
+  legal_terms_and_policies_accepted_at DateTime? @db.DateTime
+  last_login_date                      DateTime? @db.DateTime
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TEMP_AttContatos_28_09_1 {
+  Record_ID_Contact  Int?
+  Nome               String? @db.VarChar(500)
+  Sobrenome          String? @db.VarChar(500)
+  N_mero_de_telefone String? @map("Número_de_telefone") @db.VarChar(50)
+  N_mero_de_celular  String? @map("Número_de_celular") @db.VarChar(200)
+  CPF                String? @db.VarChar(200)
+  IdFiliado          String? @db.VarChar(50)
+  IdPessoa           String? @db.VarChar(50)
+  Record_ID_Company  String? @db.VarChar(200)
+  Nome_da_empresa    String? @db.VarChar(200)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TEMP_AttContatos_28_09_2 {
+  Record_ID_Contact  Int?
+  Nome               String? @db.VarChar(200)
+  Sobrenome          String? @db.VarChar(200)
+  N_mero_de_telefone String? @map("Número_de_telefone") @db.VarChar(50)
+  N_mero_de_celular  String? @map("Número_de_celular") @db.VarChar(200)
+  CPF                String? @db.VarChar(200)
+  IdFiliado          Int?
+  IdPessoa           Int?
+  Record_ID_Company  String? @db.VarChar(200)
+  Nome_da_empresa    String? @db.VarChar(200)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Temp_Backup_ContatosHubSpot {
+  Id                Int       @default(autoincrement())
+  IdFiliado         Int?
+  IdContatoHubSpot  Int?
+  Dt_Import         DateTime? @db.DateTime
+  AtivoCTN          Boolean?
+  AtivoHubSpot      Boolean?
+  DtUltimaAlteracao DateTime? @db.DateTime
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TEMP_Conc_emailsEnviados_1010 {
+  Record_ID       Int
+  Nome            String? @db.VarChar(50)
+  Sobrenome       String? @db.VarChar(100)
+  E_mail          String  @db.VarChar(50)
+  IdFiliado       Int
+  IdPessoa        Int?
+  ID_da_Matr_cula String? @map("ID_da_Matrícula") @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TEMP_Instala__esEDT {
+  Apelido               String? @db.VarChar(100)
+  CPF_CNPJ              BigInt?
+  Tipo_de_classifica__o String? @map("Tipo_de_classificação") @db.VarChar(100)
+  Telefone_s            String? @db.VarChar(100)
+
+  @@map("TEMP_InstalaçõesEDT")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TemplatesTwilio {
+  Id          Int      @default(autoincrement())
+  Body        String?  @db.Text
+  UDN         String?  @db.VarChar(50)
+  MsgCompleta Boolean?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TemporariaLeads {
+  Contact_ID Int?
+  Nome       String? @db.VarChar(100)
+  E_mail     String? @db.VarChar(100)
+  CPF        String? @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tempPreditivosms {
+  Nome      String? @db.VarChar(50)
+  Sobrenome String? @db.VarChar(50)
+  telefone  String? @db.VarChar(50)
+  celular   String? @db.VarChar(50)
+  cpf       String? @db.VarChar(50)
+  idfiliado String? @db.VarChar(50)
+  vazia     String? @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TempPreditivoWhatsapp {
+  ID_do_contato_Contact String? @db.VarChar(50)
+  Nome                  String? @db.VarChar(50)
+  Sobrenome             String? @db.VarChar(50)
+  N_mero_de_telefone    String? @map("Número_de_telefone") @db.VarChar(50)
+  N_mero_de_celular     String? @map("Número_de_celular") @db.VarChar(50)
+  CPF                   String? @db.VarChar(50)
+  IdFiliado             String? @db.VarChar(50)
+  column8               String? @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TESTE_MapaInadimplente {
+  Id                         Int       @default(autoincrement())
+  IdFiliado                  Int?
+  IdTicket                   Int?
+  IdContact                  Int?
+  IdFranquia                 Int?
+  QtdMesesInadimplente       Int?
+  TicketOwner                Int?
+  ContactOwner               Int?
+  Pipeline                   Int?
+  TicketStatus               Int?
+  ValorDivida                Float?    @db.Money
+  ValorArrecadado            Float?    @db.Money
+  Referencia                 String?   @db.VarChar(15)
+  FranquiaContatoConciliacao String?   @db.VarChar(100)
+  UltimaFormaPagamento       String?   @db.VarChar(100)
+  TicketName                 String?   @db.VarChar(30)
+  Priority                   String?   @db.VarChar(10)
+  Fonte                      String?   @db.VarChar(50)
+  TipoTiquete                String?   @db.VarChar(50)
+  StatusFinanceiro           String?   @db.VarChar(50)
+  Observacao                 String?   @db.Text
+  Descricao                  String?   @db.Text
+  MotivoRejeicao             String?   @db.Text
+  Importado                  Boolean?
+  Fechado                    Boolean?
+  Atualizar                  Boolean?
+  Excluido                   Boolean?
+  DataBaixa                  DateTime? @db.DateTime
+  DataImportado              DateTime? @db.DateTime
+  DataFiliacao               DateTime? @db.DateTime
+  DataFechamento             DateTime? @db.DateTime
+  DataEntrada                DateTime? @db.DateTime
+  DataAtualizado             DateTime? @db.DateTime
+  StatusHomologacao          String?   @db.VarChar(20)
+  IdPessoa                   Int?
+  SubFranquia                String?   @db.VarChar(50)
+  IdContatoHubSpot           Int?
+
+  @@ignore
+}
+
+model Ticket {
+  Id                                Int       @id(map: "PK__Ticket__3214EC07A912EF1D")
+  TicketOwner                       Int?
+  FranquiaContatoConciliacao        String?   @db.VarChar(100)
+  TicketName                        String?   @db.VarChar(Max)
+  Pipeline                          Int?
+  TicketStatus                      Int?
+  HsTicketPriority                  String?   @db.VarChar(30)
+  TipoCancelamento                  String?   @db.VarChar(100)
+  TipoTicket                        String?   @db.VarChar(100)
+  AssessorResponsavel               String?   @db.VarChar(100)
+  Bairro                            String?   @db.VarChar(50)
+  CEP                               String?   @db.VarChar(30)
+  Cidade                            String?   @db.VarChar(40)
+  ClosedDate                        DateTime? @db.DateTime
+  ConciliadorEncarregado            String?   @db.VarChar(100)
+  CreateDate                        DateTime? @db.DateTime
+  DataAgendamentoMantido            DateTime? @db.DateTime
+  DataContatoFiliado                DateTime? @db.DateTime
+  DataContatoMalSucedido            DateTime? @db.DateTime
+  DataFiliadoMantido                DateTime? @db.DateTime
+  DataReversao                      DateTime? @db.DateTime
+  DataAgendamentoReuniaoConciliacao DateTime? @db.DateTime
+  DataFiliadoCancelado              DateTime? @db.DateTime
+  DataPediuCancelamento             DateTime? @db.DateTime
+  FaseCicloInadimplencia            String?   @db.VarChar(40)
+  Fonte                             String?   @db.VarChar(100)
+  Franquia                          String?   @db.VarChar(200)
+  Matricula                         String?   @db.VarChar(15)
+  MotivoCancelamento                String?   @db.VarChar(Max)
+  NomeContato                       String?   @db.VarChar(300)
+  TelefoneFranquia                  String?   @db.VarChar(20)
+  TelefoneResponsavel               String?   @db.VarChar(15)
+  UltimaFormaPagamento              String?   @db.VarChar(100)
+  IdFiliado                         Int?
+  Referencia                        String?   @db.VarChar(15)
+  Observacao                        String?   @db.Text
+  Descricao                         String?   @db.Text
+  DataExclusao                      DateTime? @db.DateTime
+  Excluido                          Boolean?
+  LastModifiedDate                  DateTime? @db.DateTime
+  FranquiaResponsavel               String?   @db.VarChar(100)
+  Category                          String?   @db.VarChar(50)
+  AssociatedCompanyID               Int?
+  AssociatedContactID               Int?
+  AssociatedDealID                  Int?
+  FormaPagamento                    String?   @db.VarChar(100)
+  Regional                          Int?
+  EmpresaReclamacao                 String?   @db.VarChar(100)
+  OutrasEmpresas                    String?   @db.VarChar(100)
+  MotivoReclamacao                  String?   @db.VarChar(100)
+  UnidadeNegocio                    String?   @db.VarChar(100)
+  DataAberturaPortal                DateTime? @db.DateTime
+  HoraAberturaPortal                String?   @db.VarChar(100)
+  IdPortal                          String?   @db.VarChar(100)
+  NotaAtendimento                   Int?
+  VoltariaFazerNegocio              String?   @db.VarChar(100)
+  MotivoContatoSemSucesso           String?   @db.VarChar(200)
+  MotivoNegociacao                  String?   @db.VarChar(200)
+  ClassificacaoComunicacaoLead      String?   @db.VarChar(200)
+}
+
+model TicketStatus {
+  Id       Int     @id(map: "PK__TicketSt__3214EC07672884E9") @default(autoincrement())
+  Status   Int?
+  Nome     String? @db.VarChar(50)
+  Pipeline Int?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Ticktes {
+  Ticket_ID                    Int
+  Ticket_name                  String? @db.VarChar(Max)
+  Pipeline                     String? @db.VarChar(Max)
+  Ticket_status                String? @db.VarChar(Max)
+  Create_date                  String? @db.VarChar(Max)
+  Priority                     String? @db.VarChar(Max)
+  Ticket_owner                 String? @db.VarChar(Max)
+  Source                       String? @db.VarChar(Max)
+  Last_activity_date           String? @db.VarChar(Max)
+  Franquia_Contato_Concilia__o String? @map("Franquia_Contato_Conciliação") @db.VarChar(Max)
+  Associated_Company_ID        String? @db.VarChar(Max)
+  Associated_Company           String? @db.VarChar(Max)
+  Associated_Contact_IDs       String? @db.VarChar(Max)
+  Associated_Contacts          String? @db.VarChar(Max)
+  Associated_Deal_IDs          Bytes?
+  Associated_Deals             String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model todosContatosFiliados {
+  Contact_ID Int?
+  Nome       String? @db.VarChar(Max)
+  Sobrenome  String? @db.VarChar(Max)
+  First_name String? @db.VarChar(Max)
+  IdFiliado  Int?
+
+  @@ignore
+}
+
+model TwilioInsert {
+  body                  String?   @db.VarChar(Max)
+  from                  String?   @db.VarChar(50)
+  to                    String?   @db.VarChar(50)
+  date_updated          DateTime? @db.DateTime
+  price                 String?   @db.VarChar(50)
+  error_message         String?   @db.VarChar(50)
+  uri                   String?   @db.VarChar(300)
+  account_sid           String?   @db.VarChar(50)
+  num_media             String?   @db.VarChar(50)
+  status                String?   @db.VarChar(50)
+  messaging_service_sid String?   @db.VarChar(50)
+  sid                   String?   @db.VarChar(50)
+  date_sent             DateTime? @db.DateTime
+  date_created          DateTime? @db.DateTime
+  error_code            Int?
+  price_unit            String?   @db.VarChar(50)
+  api_version           String?   @db.VarChar(50)
+  direction             String?   @db.VarChar(50)
+  num_segments          String?   @db.VarChar(50)
+  Id                    Int       @id(map: "PK_Twilio") @default(autoincrement())
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model CargaInclusaoTwilio {
+  Dado String @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model CNPJsSindicatos {
+  CNPJ String @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ContatosEmailReajuste2023 {
+  IdContatoHub String? @db.VarChar(Max)
+  Nome         String? @db.VarChar(Max)
+  Sobrenome    String? @db.VarChar(Max)
+  IdPessoa     String? @db.VarChar(Max)
+  IdFiliado    String? @db.VarChar(Max)
+  CPF          String? @db.VarChar(Max)
+  Email        String  @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ContatosFiliadosSindicato {
+  IdPessoa String @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ContatosPushReajuste2023 {
+  IdContatoHub String? @db.VarChar(Max)
+  Nome         String? @db.VarChar(Max)
+  Sobrenome    String? @db.VarChar(Max)
+  IdPessoa     String? @db.VarChar(Max)
+  IdFiliado    String? @db.VarChar(Max)
+  CPF          String? @db.VarChar(Max)
+  Email        String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model DisparoMassaTwilioBackup {
+  Id          Int     @default(autoincrement())
+  Numero      String? @db.VarChar(50)
+  NomeTitular String? @db.VarChar(150)
+  Id_Pessoa   Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model DisparoMassaTwilioBackup2 {
+  Id_Pessoa   Int?
+  NomeTitular String? @db.VarChar(150)
+  Numero      String? @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model DisparoMassaTwilioEnviados {
+  Id          Int     @default(autoincrement())
+  Numero      String? @db.VarChar(50)
+  NomeTitular String? @db.VarChar(150)
+  Id_Pessoa   Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model DisparoMassaTwilioRejeitados {
+  Id          Int     @default(autoincrement())
+  Numero      String? @db.VarChar(50)
+  NomeTitular String? @db.VarChar(150)
+  Id_Pessoa   Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model EnviadosTwilio {
+  Numero String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model EnviadosTwilioBackup {
+  Numero String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ExclusaoDisparoMassaTwilio {
+  Id_Pessoa Int
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ExclusaoDisparoMassaTwilioSindicato {
+  Id          Int     @default(autoincrement())
+  Numero      String? @db.VarChar(50)
+  NomeTitular String? @db.VarChar(150)
+  Id_Pessoa   Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Temp_pushApp {
+  MATRICULA  String? @db.VarChar(50)
+  CPF        String? @db.VarChar(50)
+  TELEFONE   String? @db.VarChar(50)
+  cdt_id     String? @db.VarChar(50)
+  id_filiado String? @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TempMergecsv1 {
+  From        String? @db.VarChar(Max)
+  To          String? @db.VarChar(Max)
+  Body        String? @db.VarChar(Max)
+  Status      String? @db.VarChar(Max)
+  SentDate    String? @db.VarChar(Max)
+  ApiVersion  String? @db.VarChar(Max)
+  NumSegments String? @db.VarChar(Max)
+  ErrorCode   String? @db.VarChar(Max)
+  AccountSid  String? @db.VarChar(Max)
+  Sid         String? @db.VarChar(Max)
+  Direction   String? @db.VarChar(Max)
+  Price       String? @db.VarChar(Max)
+  PriceUnit   String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TempMergecsv18 {
+  From        String? @db.VarChar(Max)
+  To          String? @db.VarChar(Max)
+  Body        String? @db.VarChar(Max)
+  Status      String? @db.VarChar(Max)
+  SentDate    String? @db.VarChar(Max)
+  ApiVersion  String? @db.VarChar(Max)
+  NumSegments String? @db.VarChar(Max)
+  ErrorCode   String? @db.VarChar(Max)
+  AccountSid  String? @db.VarChar(Max)
+  Sid         String? @db.VarChar(Max)
+  Direction   String? @db.VarChar(Max)
+  Price       String? @db.VarChar(Max)
+  PriceUnit   String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TempMergecsv19 {
+  From        String? @db.VarChar(Max)
+  To          String? @db.VarChar(Max)
+  Body        String? @db.VarChar(Max)
+  Status      String? @db.VarChar(Max)
+  SentDate    String? @db.VarChar(Max)
+  ApiVersion  String? @db.VarChar(Max)
+  NumSegments String? @db.VarChar(Max)
+  ErrorCode   String? @db.VarChar(Max)
+  AccountSid  String? @db.VarChar(Max)
+  Sid         String? @db.VarChar(Max)
+  Direction   String? @db.VarChar(Max)
+  Price       String? @db.VarChar(Max)
+  PriceUnit   String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TempMergecsv2 {
+  From        String? @db.VarChar(Max)
+  To          String? @db.VarChar(Max)
+  Body        String? @db.VarChar(Max)
+  Status      String? @db.VarChar(Max)
+  SentDate    String? @db.VarChar(Max)
+  ApiVersion  String? @db.VarChar(Max)
+  NumSegments String? @db.VarChar(Max)
+  ErrorCode   String? @db.VarChar(Max)
+  AccountSid  String? @db.VarChar(Max)
+  Sid         String? @db.VarChar(Max)
+  Direction   String? @db.VarChar(Max)
+  Price       String? @db.VarChar(Max)
+  PriceUnit   String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TempMergecsv20 {
+  From        String? @db.VarChar(Max)
+  To          String? @db.VarChar(Max)
+  Body        String? @db.VarChar(Max)
+  Status      String? @db.VarChar(Max)
+  SentDate    String? @db.VarChar(Max)
+  ApiVersion  String? @db.VarChar(Max)
+  NumSegments String? @db.VarChar(Max)
+  ErrorCode   String? @db.VarChar(Max)
+  AccountSid  String? @db.VarChar(Max)
+  Sid         String? @db.VarChar(Max)
+  Direction   String? @db.VarChar(Max)
+  Price       String? @db.VarChar(Max)
+  PriceUnit   String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TempMergecsv21 {
+  From        String? @db.VarChar(Max)
+  To          String? @db.VarChar(Max)
+  Body        String? @db.VarChar(Max)
+  Status      String? @db.VarChar(Max)
+  SentDate    String? @db.VarChar(Max)
+  ApiVersion  String? @db.VarChar(Max)
+  NumSegments String? @db.VarChar(Max)
+  ErrorCode   String? @db.VarChar(Max)
+  AccountSid  String? @db.VarChar(Max)
+  Sid         String? @db.VarChar(Max)
+  Direction   String? @db.VarChar(Max)
+  Price       String? @db.VarChar(Max)
+  PriceUnit   String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TempMergecsv22 {
+  From        String? @db.VarChar(Max)
+  To          String? @db.VarChar(Max)
+  Body        String? @db.VarChar(Max)
+  Status      String? @db.VarChar(Max)
+  SentDate    String? @db.VarChar(Max)
+  ApiVersion  String? @db.VarChar(Max)
+  NumSegments String? @db.VarChar(Max)
+  ErrorCode   String? @db.VarChar(Max)
+  AccountSid  String? @db.VarChar(Max)
+  Sid         String? @db.VarChar(Max)
+  Direction   String? @db.VarChar(Max)
+  Price       String? @db.VarChar(Max)
+  PriceUnit   String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TempMergeEnviadosTwilio {
+  From        String? @db.VarChar(Max)
+  To          String? @db.VarChar(Max)
+  Body        String? @db.VarChar(Max)
+  Status      String? @db.VarChar(Max)
+  SentDate    String? @db.VarChar(Max)
+  ApiVersion  String? @db.VarChar(Max)
+  NumSegments String? @db.VarChar(Max)
+  ErrorCode   String? @db.VarChar(Max)
+  AccountSid  String? @db.VarChar(Max)
+  Sid         String? @db.VarChar(Max)
+  Direction   String? @db.VarChar(Max)
+  Price       String? @db.VarChar(Max)
+  PriceUnit   String? @db.VarChar(Max)
+
+  @@ignore
+}
+
+model TwilioInsertBRL {
+  body                  String?   @db.VarChar(Max)
+  from                  String?   @db.VarChar(50)
+  to                    String?   @db.VarChar(50)
+  date_updated          DateTime? @db.DateTime
+  price                 String?   @db.VarChar(50)
+  error_message         String?   @db.VarChar(50)
+  uri                   String?   @db.VarChar(300)
+  account_sid           String?   @db.VarChar(50)
+  num_media             String?   @db.VarChar(50)
+  status                String?   @db.VarChar(50)
+  messaging_service_sid String?   @db.VarChar(50)
+  sid                   String?   @db.VarChar(50)
+  date_sent             DateTime? @db.DateTime
+  date_created          DateTime? @db.DateTime
+  error_code            Int?
+  price_unit            String?   @db.VarChar(50)
+  api_version           String?   @db.VarChar(50)
+  direction             String?   @db.VarChar(50)
+  num_segments          String?   @db.VarChar(50)
+  Id                    Int       @id(map: "PK_TwilioInsertBRL") @default(autoincrement())
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model DisparoMassaTwilioContador {
+  Id       Int @id @default(autoincrement())
+  Contador Int
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model NomesSMSrejeitado {
+  IDNum   Int?
+  Nome    String? @db.VarChar(50)
+  column3 String? @db.NVarChar(1)
+  column4 String? @db.NVarChar(1)
+
+  @@ignore
+}
